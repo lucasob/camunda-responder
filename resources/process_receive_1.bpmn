@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0j0s69b" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.10.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="PROCESS_RECEIVE_1" name="Testing Receive" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Hello World">
+      <bpmn:outgoing>Flow_0j24u02</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1hb371a">
+      <bpmn:incoming>Flow_1ao949k</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1jgmey5" sourceRef="TEST_1" targetRef="TEST_2" />
+    <bpmn:sequenceFlow id="Flow_17e2qhu" sourceRef="TEST_2" targetRef="TEST_3" />
+    <bpmn:sequenceFlow id="Flow_1ao949k" sourceRef="TEST_3" targetRef="Event_1hb371a" />
+    <bpmn:serviceTask id="TEST_1" name="Random Task" camunda:type="external" camunda:topic="INITIAL_RECEIVED">
+      <bpmn:incoming>Flow_0j24u02</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jgmey5</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:receiveTask id="TEST_2" name="Wait for Message" messageRef="Message_0ginkto">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_1jgmey5</bpmn:incoming>
+      <bpmn:outgoing>Flow_17e2qhu</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:serviceTask id="TEST_3" name="Finished" camunda:type="external" camunda:topic="FINALISE">
+      <bpmn:incoming>Flow_17e2qhu</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ao949k</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0j24u02" sourceRef="StartEvent_1" targetRef="TEST_1" />
+  </bpmn:process>
+  <bpmn:message id="Message_0ginkto" name="Message_DONE" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PROCESS_RECEIVE_1">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="170" y="145" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1hb371a_di" bpmnElement="Event_1hb371a">
+        <dc:Bounds x="742" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_199qjuy_di" bpmnElement="TEST_1">
+        <dc:Bounds x="260" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0knwlc4_di" bpmnElement="TEST_2">
+        <dc:Bounds x="420" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0yfqjk0_di" bpmnElement="TEST_3">
+        <dc:Bounds x="580" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0j24u02_di" bpmnElement="Flow_0j24u02">
+        <di:waypoint x="215" y="120" />
+        <di:waypoint x="260" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ao949k_di" bpmnElement="Flow_1ao949k">
+        <di:waypoint x="680" y="120" />
+        <di:waypoint x="742" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jgmey5_di" bpmnElement="Flow_1jgmey5">
+        <di:waypoint x="360" y="120" />
+        <di:waypoint x="420" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17e2qhu_di" bpmnElement="Flow_17e2qhu">
+        <di:waypoint x="520" y="120" />
+        <di:waypoint x="580" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
