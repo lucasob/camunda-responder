@@ -9,4 +9,3 @@
                  [org.camunda.bpm/camunda-external-task-client "7.18.0"]
                  [cheshire "5.11.0"]]
   :repl-options {:init-ns responder.core})
-s
